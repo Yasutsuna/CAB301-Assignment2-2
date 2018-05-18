@@ -3,11 +3,17 @@ package project;
 import java.util.Random;
 
 public class BruteForceAlgorithm {
+	int testnum = 1;
 	
 	public static void main(String[] args) {
+		int arraySize = 100000;
+		
 		BruteForceAlgorithm test = new BruteForceAlgorithm();
-		test.AutoCheck();
 		//test.TestCaseCheck();
+		for (int i = 0; i < 10; i++) {
+			test.AutoCheck(arraySize);
+			arraySize = arraySize + 100000;
+		}
 	}
 	
 	/*
@@ -30,8 +36,7 @@ public class BruteForceAlgorithm {
 	/*
 	 * Used to run massive test cases.
 	 */
-	public void AutoCheck() {
-		int arraySize = 100000; //This size and up
+	public void AutoCheck(int arraySize) {
 		int [] A = new int[arraySize];
 		
 		int max = 10000;
@@ -42,8 +47,9 @@ public class BruteForceAlgorithm {
 			A[z] = rand.nextInt(max + 1 - min) - min;
 		}
 		
-		System.out.println(BruteForceMedian(A));
-		System.out.println(Median(A));
+		System.out.println("Test " + testnum + ": " + BruteForceMedian(A));
+		//System.out.println("Test " + testnum + ": " + Median(A));
+		testnum++;
 	}
 	
 	/*
