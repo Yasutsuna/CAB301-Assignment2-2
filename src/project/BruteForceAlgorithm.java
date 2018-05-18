@@ -1,29 +1,65 @@
 package project;
 
+import java.util.Random;
+
 public class BruteForceAlgorithm {
 	
 	public static void main(String[] args) {
 		BruteForceAlgorithm test = new BruteForceAlgorithm();
-		test.Check();
+		test.AutoCheck();
+		//test.TestCaseCheck();
 	}
 	
-	public void Check() {
-		int[] A = {30,10,50,40,20};
-	//	int[] A = {10,520,230,640,7750};
+	/*
+	 * Used in manual test cases only.
+	 */
+	public void TestCaseCheck() {
+		//int[] A = {200,400,499,550,600}; //Test Case 1 No rearrangement
+		//int[] A = {200,300,100,500,400}; //Test Case 2 Arrangement needed
+		//int[] A = {100,200,300,300,400}; //Test Case 3 Duplicates
+		//int[] A = {100}; //Test Case 4 One number only
+		//int[] A = {500,400,300,200,100}; //Test Case 5 Decreament
+		//int[] A = {100,200,300,400,500,600}; //Test Case 6 No rearrangement Even
+		//int[] A = {600,500,400,300,200,100}; //Test Case 7 Rearrangement Even
+		int[] A = {550,500,450,400,350,300,250,200,150,100}; //Test Case 8 10 numbers
 		
-		System.out.println("Foo " + BruteForceMedian(A));
-		System.out.print("Fuu " + Median(A));
+		System.out.println("Brute Foce Median result: " + BruteForceMedian(A));
+		System.out.println("Partition Median result: " + Median(A));
 	}
 	
-	//Unefficient Algorithm
+	/*
+	 * Used to run massive test cases.
+	 */
+	public void AutoCheck() {
+		int arraySize = 100000; //This size and up
+		int [] A = new int[arraySize];
+		
+		int max = 10000;
+		int min = 0;
+		Random rand = new Random();
+		
+		for (int z = 0; z < A.length; z++) {
+			A[z] = rand.nextInt(max + 1 - min) - min;
+		}
+		
+		System.out.println(BruteForceMedian(A));
+		System.out.println(Median(A));
+	}
+	
+	/*
+	 * Not efficient Algorithm
+	 */
 	public int BruteForceMedian(int[] A) {
-		int n = A.length;
+		int numsmaller;;
+		int numequal;;
+		
+		int n = A.length; //Need to plus 1 as count from 1 not 0
 		int k = n/2;
 		
 		for (int i = 0; i < n-1; i++) {
 			
-			int numsmaller = 0;
-			int numequal = 0;
+			numsmaller = 0;
+			numequal = 0;
 			
 			for (int j = 0; j < n-1; j++) {
 				if (A[j] < A[i]) {
@@ -44,7 +80,9 @@ public class BruteForceAlgorithm {
 		return 0; //We'll never get here...
 	}
 	
-	//More Efficient Algorithm
+	/*
+	 * Efficient Algorithm
+	 */
 	public int Median(int[] A) {
 		int n = A.length;
 		if (n == 1) {
@@ -79,7 +117,7 @@ public class BruteForceAlgorithm {
 		
 		for (int j = l + 1; j < h; j++) { //Check of h needs -1 or not
 			if (A[j] < pivotval) {
-				pivotloc++;
+				pivotloc = pivotloc + 1;
 				
 				int temp;
 				temp = A[pivotloc];
@@ -95,4 +133,10 @@ public class BruteForceAlgorithm {
 		
 		return pivotloc;
 	}
+	
+	/*
+	 * Appending for results
+	 */
+	
+	
 }
