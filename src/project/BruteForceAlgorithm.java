@@ -155,6 +155,7 @@ public class BruteForceAlgorithm {
 		
 		for (int j = l + 1; j < h; j++) { //Check of h needs -1 or not
 			if (A[j] < pivotval) {
+				boCount2++;
 				pivotloc = pivotloc + 1;
 				
 				int temp;
@@ -162,7 +163,7 @@ public class BruteForceAlgorithm {
 				A[pivotloc] = A[j];
 				A[j] = temp;
 				
-				boCount2++;
+				
 			}
 			
 		}
@@ -170,7 +171,6 @@ public class BruteForceAlgorithm {
 		temp2 = A[l];
 		A[l] = A[pivotloc];
 		A[pivotloc] = temp2;
-		boCount2++;
 		
 		return pivotloc;
 	}
